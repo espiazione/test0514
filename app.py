@@ -27,7 +27,7 @@ image = (
     .first()
     .select('B.*')
 )
-
+vis_params = {'min':100, 'max': 3500,  'bands': ['B8', 'B4', 'B3']}
 # 隨機取樣
 training_samples = image.sample(
     region=image.geometry(),
@@ -38,7 +38,7 @@ training_samples = image.sample(
 )
 
 # 分群訓練
-n_clusters = 11
+n_clusters = 10
 clusterer = ee.Clusterer.wekaKMeans(nClusters=n_clusters).train(training_samples)
 clustered_result = image.cluster(clusterer)
 
