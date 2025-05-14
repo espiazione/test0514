@@ -16,7 +16,7 @@ st.set_page_config(layout="wide")
 st.title("🌍 使用服務帳戶連接 GEE 的 Streamlit App")
 
 # 設定中心點為彰師大進德校區
-point = ee.Geometry.Point([120.558346, 24.081653])
+point = ee.Geometry.Point([120.5583462887228, 24.081653403304525])
 
 # 影像處理
 image = (
@@ -27,7 +27,10 @@ image = (
     .first()
     .select('B.*')
 )
-vis_params = {'min':100, 'max': 3500,  'bands': ['B8', 'B4', 'B3']}
+
+# 可見光參數（False color）
+vis_params = {'min': 100, 'max': 3500, 'bands': ['B4', 'B3', 'B2']}
+
 # 隨機取樣
 training_samples = image.sample(
     region=image.geometry(),
@@ -54,10 +57,9 @@ legend_dict = {
     'seven': '#ff8800',
     'eight': '#00ff88',
     'nine': '#8800ff',
-    'ten': '#444444',
 }
 palette = list(legend_dict.values())
-vis_clustered = {'min': 0, 'max': 10, 'palette': palette}
+vis_clustered = {'min': 0, 'max': 9, 'palette': palette}
 
 # Split-map 顯示
 Map = geemap.Map()
