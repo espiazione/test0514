@@ -18,7 +18,7 @@ ee.Initialize(credentials)
 
 ###############################################
 st.set_page_config(layout="wide")
-st.title("🌍 使用服務帳戶連接 GEE 的 Streamlit App")
+st.title("🌍 使用服務帳戶連接 GEE 的 Streamlit App")#標題
 
 
 # 地理區域
