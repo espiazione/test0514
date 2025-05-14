@@ -28,9 +28,6 @@ image = (
     .select('B.*')
 )
 
-# 可見光參數（False color）
-vis_params = {'min': 100, 'max': 3500, 'bands': ['B8', 'B4', 'B3']}
-
 # 隨機取樣
 training_samples = image.sample(
     region=image.geometry(),
