@@ -4,7 +4,7 @@ from datetime import date
 st.set_page_config(layout="wide", page_title="這是Streamlit App第二次練習！")
 
 st.title("應用程式主頁")
-
+#超連結方式
 st.markdown(
     """
     This multipage app template demonstrates various interactive web apps created using [streamlit](https://streamlit.io), [GEE](https://earthengine.google.com/), 
