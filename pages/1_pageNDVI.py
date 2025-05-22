@@ -52,6 +52,15 @@ classVis = {
             'f0f0f0', '0064c8', '0096a0', '00cf75', 'fae6a0']
 }
 # 顯示地圖
-my_Map = geemap.Map(my_lc)
-my_Map.centerObject(my_image.geometry(my_lc), 10)
+# 建立地圖物件（不傳入任何參數）
+my_Map = geemap.Map()
+
+# 將土地覆蓋影像加入圖層
+my_Map.addLayer(my_lc, classVis, 'Land Cover')
+
+# 將地圖中心設在衛星影像的位置
+my_Map.centerObject(my_image.geometry(), 10)
+
+# 輸出到 Streamlit
 my_Map.to_streamlit(height=600)
+
