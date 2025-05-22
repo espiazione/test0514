@@ -51,12 +51,12 @@ classVis = {
   'palette': ['006400' ,'ffbb22', 'ffff4c', 'f096ff', 'fa0000', 'b4b4b4',
             'f0f0f0', '0064c8', '0096a0', '00cf75', 'fae6a0']
 }
-my_Map.addLayer(my_lc, classVis, "ESA WorldCover 10m v200")
-my_Map.add_legend(title='ESA Land Cover Type', builtin_legend='ESA_WorldCover')
+
 # 顯示地圖
 # 建立地圖物件（不傳入任何參數）
 my_Map = geemap.Map()
-
+my_Map.addLayer(my_lc, classVis, "ESA WorldCover 10m v200")
+my_Map.add_legend(title='ESA Land Cover Type', builtin_legend='ESA_WorldCover')
 # 將土地覆蓋影像加入圖層
 my_Map.addLayer(my_lc, classVis, 'Land Cover')
 
