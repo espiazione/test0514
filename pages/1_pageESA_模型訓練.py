@@ -28,7 +28,7 @@ my_point = ee.Geometry.Point([121.462129, 25.108993])
 my_image = (
     ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
     .filterBounds(my_point)
-    .filterDate('2021-01-01', '2022-01-01')
+    .filterDate('2020-01-01', '2021-01-01')
     .sort('CLOUDY_PIXEL_PERCENTAGE')
     .first()
     .select('B.*')
@@ -36,7 +36,7 @@ my_image = (
 
 vis_params = {'min':100, 'max': 3500, 'bands': ['B8',  'B4',  'B3']}
 
-my_lc = ee.Image('ESA/WorldCover/v200/2021')
+my_lc = ee.Image('ESA/WorldCover/v100/2020')
 # ESA WorldCover 10m v200
 # https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100#bands
 
@@ -54,15 +54,19 @@ classVis = {
 
 # 顯示地圖
 # 建立地圖物件（不傳入任何參數）
+# 建立地圖物件
 my_Map = geemap.Map()
-my_Map.addLayer(my_lc, classVis, "ESA WorldCover 10m v200")
-my_Map.add_legend(title='ESA Land Cover Type', builtin_legend='ESA_WorldCover')
-# 將土地覆蓋影像加入圖層
-my_Map.addLayer(my_lc, classVis, 'Land Cover')
 
-# 將地圖中心設在衛星影像的位置
+# 加入圖層
+my_Map.addLayer(my_image, vis_params, 'Sentinel-2 Image')
+my_Map.addLayer(my_lc, classVis, 'ESA WorldCover 10m v100')
+
+# 設定地圖中心
 my_Map.centerObject(my_image.geometry(), 10)
-my_Map.add_legend(title='Land Cover Type (ESA)', legend_dict =classVis, draggable=False, position = 'bottomright')
-# 輸出到 Streamlit
+
+# 加入圖例（使用預設圖例）
+my_Map.add_legend(title='ESA Land Cover Type', builtin_legend='ESA_WorldCover')
+
+# 顯示地圖
 my_Map.to_streamlit(height=600)
 
