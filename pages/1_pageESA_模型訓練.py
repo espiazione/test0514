@@ -19,7 +19,7 @@ ee.Initialize(credentials)
 
 st.set_page_config(layout="wide")
 st.title("🌍  期末作業：GEE Streamlit App 練習")
-st.write("Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-1C ESA_WorldCover2021")
+st.write("Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-1C ESA_WorldCover2020")
 
 # 地理區域
 my_point = ee.Geometry.Point([121.462129, 25.108993])
