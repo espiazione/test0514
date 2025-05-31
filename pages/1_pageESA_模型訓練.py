@@ -6,7 +6,7 @@ import folium
 
 st.set_page_config(layout="wide")
 st.title("🌍 中彰沿海 NDWI 比較（1984 vs 2024）")
-st.write("資料來源：LANDSAT/LT05/C02/T1_L2 & LANDSAT/LE07/C02/T1_L2")
+st.write("資料來源：LANDSAT/LT05/C02/T1_L2 & LANDSAT/LC08/C02/T1_L2")
 
 service_account_info = st.secrets["GEE_SERVICE_ACCOUNT"]
 
@@ -37,7 +37,7 @@ image_1984 = (
 ndwi_1984 = addNDWI(image_1984).select('ndwi').unmask(0).clip(taichung)
 
 image_2024 = (
-    ee.ImageCollection('LANDSAT/LE07/C02/T1_L2')
+    ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
     .filterDate('2024-01-01', '2024-12-31')
     .filterBounds(taichung)
     .map(apply_scale_factors)
