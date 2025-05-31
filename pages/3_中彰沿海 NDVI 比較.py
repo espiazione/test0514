@@ -48,9 +48,9 @@ image_2024 = (
 ndvi_2024 = addNDVI(image_2024, 'SR_B4', 'SR_B5').select('ndvi').unmask(0).clip(taichung)
 
 ndvi_vis = {
-    'min': -1.0,
-    'max': 1.0,
-    'palette': ['#d73027', '#fdae61', '#a6d96a', '#1a9850'],  
+    'min': 0.0,
+    'max': 0.7,
+    'palette': ['brown', 'beige', 'blue'],  
 }
 
 # 建立地圖
