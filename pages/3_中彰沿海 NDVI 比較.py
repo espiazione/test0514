@@ -77,7 +77,6 @@ legend_html = """
      </div>
 """
 
-"""
 m.get_root().html.add_child(folium.Element(legend_html))
 
 # 顯示地圖
