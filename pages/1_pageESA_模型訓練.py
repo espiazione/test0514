@@ -1,6 +1,5 @@
-
+import folium  
 import streamlit as st
-import folium  # 加在最上面
 import ee
 from google.oauth2 import service_account
 import geemap.foliumap as geemap
@@ -75,6 +74,24 @@ ndwi_vis = {
     'max': 1.0,
     'palette': ['brown', 'beige', 'blue'],
 }
+legend_html = """
+     <div style="
+         position: fixed; 
+         bottom: 30px; left: 30px; width: 200px; height: 120px; 
+         background-color: white;
+         border:2px solid grey;
+         z-index:9999;
+         font-size:14px;
+         padding: 10px;
+     ">
+     <b>NDWI 色階說明</b><br>
+     <i style="background: brown; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 低水分 (裸地)<br>
+     <i style="background: beige; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 中水分 (植被/濕地)<br>
+     <i style="background: blue; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 高水分 (水體)<br>
+     </div>
+"""
+
+m.get_root().html.add_child(folium.Element(legend_html))
 
 # ---------------------
 # 建立比較地圖
