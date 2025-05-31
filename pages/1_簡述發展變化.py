@@ -8,10 +8,8 @@ st.title("應用程式主頁")
 st.title("利用擴充器示範")
 
 markdown = """
-1. You can use it as a template for your own project.
-2. Customize the sidebar by changing the sidebar text and logo in each Python file.
-3. Find your favorite emoji from https://emojipedia.org.
-4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
+這是1984年到2024年台中及彰化沿海一帶工業區發展變化影片。以NDWI的形式呈現。
+從中可發現
 
 """
 
