@@ -1,4 +1,6 @@
+
 import streamlit as st
+import folium  # 加在最上面
 import ee
 from google.oauth2 import service_account
 import geemap.foliumap as geemap
