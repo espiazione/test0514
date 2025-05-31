@@ -10,6 +10,6 @@ st.title("利用擴充器示範")
 
 
 with st.expander("播放mp4檔"):
-    video_file = open("video_path = r"C:\Users\acer\Downloads\ndwi_timelapse.mp4", "rb")  # "rb"指的是讀取二進位檔案（圖片、影片）
+    video_file = open("video_path = r"C:\使用者\acer\下載\ndwi_timelapse.mp4", "rb")  # "rb"指的是讀取二進位檔案（圖片、影片）
     video_bytes = video_file.read()
     st.video(video_bytes)
