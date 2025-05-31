@@ -60,11 +60,10 @@ right_layer = geemap.ee_tile_layer(ndvi_2024, ndvi_vis, 'NDVI 2024')
 m.centerObject(taichung, 10)
 m.split_map(left_layer, right_layer)
 
-# 圖例 HTML
 legend_html = """
      <div style="
          position: fixed; 
-         bottom: 30px; left: 30px; width: 220px; height: 130px; 
+         bottom: 30px; left: 30px; width: 200px; height: 120px; 
          background-color: white;
          border:2px solid grey;
          z-index:9999;
@@ -72,11 +71,12 @@ legend_html = """
          padding: 10px;
      ">
      <b>NDVI 色階說明</b><br>
-     <i style="background:#d73027; width: 18px; height: 18px; float: left; margin-right: 8px;"></i> 無植生 (裸地)<br>
-     <i style="background:#fdae61; width: 18px; height: 18px; float: left; margin-right: 8px;"></i> 草地/低度植被<br>
-     <i style="background:#a6d96a; width: 18px; height: 18px; float: left; margin-right: 8px;"></i> 中等植被<br>
-     <i style="background:#1a9850; width: 18px; height: 18px; float: left; margin-right: 8px;"></i> 濃密植被<br>
+     <i style="background: brown; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 低 NDVI (裸地/建物)<br>
+     <i style="background: beige; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 中 NDVI (草地/灌叢)<br>
+     <i style="background: blue; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 高 NDVI (森林/密植)<br>
      </div>
+"""
+
 """
 m.get_root().html.add_child(folium.Element(legend_html))
 
