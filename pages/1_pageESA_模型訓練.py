@@ -24,7 +24,7 @@ def apply_scale_factors(image):
     return image.addBands(optical_bands, None, True).addBands(thermal_bands, None, True)
 
 def addNDWI(image):
-    ndwi = image.normalizedDifference(['SR_B2', 'SR_B4']).rename('ndwi')
+    ndwi = image.normalizedDifference(['SR_B3', 'SR_B5']).rename('ndwi')
     return image.addBands(ndwi)
 
 image_1984 = (
