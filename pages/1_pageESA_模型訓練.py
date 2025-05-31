@@ -18,54 +18,42 @@ ee.Initialize(credentials)
 ###############################################
 
 st.set_page_config(layout="wide")
-st.title("🌍  期末作業：GEE Streamlit App 練習")
-st.write("Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-1C ESA_WorldCover2020")
+st.title("🌍  期末報告中彰沿海一帶差異")
+st.write("LANDSAT/LT05/C02/T1_L2&LANDSAT/LE07/C02/T1_L2")
 
 # 地理區域
-my_point = ee.Geometry.Point([121.462129, 25.108993])
+my_point = ee.Geometry.Point([120.3356, 24.0494, 120.5795, 24.3223])
 
-# 擷取 Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-1C 衛星影像
-my_image = (
-    ee.ImageCollection('COPERNICUS/S2_HARMONIZED')
-    .filterBounds(my_point)
-    .filterDate('2020-01-01', '2021-01-01')
-    .sort('CLOUDY_PIXEL_PERCENTAGE')
-    .first()
-    .select('B.*')
-)
+taichung = ee.Geometry.Rectangle([120.3356, 24.0494, 120.5795, 24.3223])
 
-vis_params = {'min':100, 'max': 3500, 'bands': ['B8',  'B4',  'B3']}
+dataset = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2').filterDate('1984-01-01', '1984-12-31').filterBounds(taichung)
 
-my_lc = ee.Image('ESA/WorldCover/v100/2020')
-# ESA WorldCover 10m v200
-# https://developers.google.com/earth-engine/datasets/catalog/ESA_WorldCover_v100#bands
 
-classValues = [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 100]
-remapValues = ee.List.sequence(0, 10)
-label = 'lc'
-my_lc = my_lc.remap(classValues, remapValues, bandName='Map').rename(label).toByte()#把剛剛的數列0~10儲存格式變8位元
+# Applies scaling factors.
+def apply_scale_factors(image):
+  optical_bands = image.select('SR_B.').multiply(0.0000275).add(-0.2)
+  thermal_bands = image.select('ST_B.*').multiply(0.00341802).add(149.0)
+  return image.addBands(optical_bands, None, True).addBands(thermal_bands, None, True)
 
-classVis = {
-  'min': 0,
-  'max': 10,
-  'palette': ['006400' ,'ffbb22', 'ffff4c', 'f096ff', 'fa0000', 'b4b4b4',
-            'f0f0f0', '0064c8', '0096a0', '00cf75', 'fae6a0']
+dataset = dataset.map(apply_scale_factors)
+#變1張影像
+dataset = dataset.median()
+
+
+def addNDWI(image):
+  ndwi = image.normalizedDifference(['SR_B2', 'SR_B4']).rename('ndwi')
+  return image.addBands(ndwi)
+withNdwi = addNDWI(dataset)
+ndwiVis = {
+  'min': -1.0,
+  'max': 1.0,
+  'palette': ['brown', 'beige', 'blue'],
+  'bands': ['ndwi'],
 }
 
-# 顯示地圖
-# 建立地圖物件（不傳入任何參數）
-# 建立地圖物件
-my_Map = geemap.Map()
-
-# 加入圖層
-my_Map.addLayer(my_image, vis_params, 'Sentinel-2 Image')
-my_Map.addLayer(my_lc, classVis, 'ESA WorldCover 10m v100')
-
-# 設定地圖中心
-my_Map.centerObject(my_image.geometry(), 10)
-
-# 加入圖例（使用預設圖例）
-my_Map.add_legend(title='ESA Land Cover Type', builtin_legend='ESA_WorldCover')
+m = geemap.Map()
+m.set_center(120.9, 24.2, 10)
+m.add_layer(withNdwi.select('ndwi').unmask(0).clip(taichung), ndwiVis, 'NDWI taichung 1984')
 
 # 顯示地圖
 my_Map.to_streamlit(height=600)
