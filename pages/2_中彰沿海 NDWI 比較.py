@@ -78,4 +78,4 @@ legend_html = """
 
 m.get_root().html.add_child(folium.Element(legend_html))
 
-m.to_streamlit(height=600)
+m.to_streamlit(height=400)
