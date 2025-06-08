@@ -57,7 +57,7 @@ ndvi_vis = {
 m = geemap.Map()
 left_layer = geemap.ee_tile_layer(ndvi_1984, ndvi_vis, 'NDVI 1984')
 right_layer = geemap.ee_tile_layer(ndvi_2024, ndvi_vis, 'NDVI 2024')
-m.centerObject(taichung, 12)
+m.centerObject(taichung, 11)
 m.split_map(left_layer, right_layer)
 
 legend_html = """
@@ -80,4 +80,4 @@ legend_html = """
 m.get_root().html.add_child(folium.Element(legend_html))
 
 # 顯示地圖
-m.to_streamlit(height=6000)
+m.to_streamlit(height=600)
