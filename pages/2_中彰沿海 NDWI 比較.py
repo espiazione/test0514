@@ -55,7 +55,7 @@ m = geemap.Map()
 left_layer = geemap.ee_tile_layer(ndwi_1984, ndwi_vis, 'NDWI 1984')
 right_layer = geemap.ee_tile_layer(ndwi_2024, ndwi_vis, 'NDWI 2024')
 
-m.centerObject(taichung, 13)
+m.centerObject(taichung, 11)
 m.split_map(left_layer, right_layer)
 
 # 手動加入圖例 HTML
