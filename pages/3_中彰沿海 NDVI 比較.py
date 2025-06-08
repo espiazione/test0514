@@ -80,4 +80,4 @@ legend_html = """
 m.get_root().html.add_child(folium.Element(legend_html))
 
 # 顯示地圖
-m.to_streamlit(height=600)
+m.to_streamlit(height=350)
