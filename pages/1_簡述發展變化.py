@@ -17,6 +17,11 @@ markdown = """
 st.markdown(markdown)
 
 with st.expander("播放mp4檔"):
-    video_file = open("ndwi_timelapse.mp4", "rb")  # "rb"指的是讀取二進位檔案（圖片、影片）
+    video_file = open("ndwi_timelapse.mp4", "rb")
     video_bytes = video_file.read()
-    st.video(video_bytes)
+
+    # 用 Columns 來控制畫面寬度（左右留白）
+    col1, col2, col3 = st.columns([1, 4, 1])  # 中間占比 4，左右各占 1
+
+    with col2:
+        st.video(video_bytes)  # 影片放中間、寬一點
