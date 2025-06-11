@@ -71,9 +71,9 @@ legend_html = """
          padding: 10px;
      ">
      <b>NDVI 色階說明</b><br>
-     <i style="background: brown; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 低 NDVI (裸地/建物)<br>
-     <i style="background: beige; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 中 NDVI (草地/灌叢)<br>
-     <i style="background: blue; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 高 NDVI (森林/密植)<br>
+     <i style="background: brown; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 低 NDVI (水體)<br>
+     <i style="background: beige; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 中 NDVI (建物)<br>
+     <i style="background: blue; width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7;"></i> 高 NDVI (森林)<br>
      </div>
 """
 
